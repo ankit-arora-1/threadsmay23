@@ -1,4 +1,4 @@
-package print1to100;
+package executorintro;
 
 public class NumberPrinter implements Runnable {
 
