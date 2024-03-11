@@ -1,6 +1,6 @@
 package callables;
 
-import java.util.concurrent.Callable;
+import java.util.concurrent.*;
 
 public class NumberPrinter implements Callable<Integer> {
 
@@ -11,7 +11,13 @@ public class NumberPrinter implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() {
+    public Integer call() throws ExecutionException, InterruptedException {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        NamePrinter namePrinter = new NamePrinter();
+        Future<String> resultFuture = executorService.submit(namePrinter);
+        System.out.println(resultFuture.get());
+
+
         System.out.println("Printing from thread: " + Thread.currentThread().getName() + ". Number = " + i);
         return i;
     }
